@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import './Navbar.css';
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const role = useSelector((state) => state.auth.role);
@@ -40,7 +41,7 @@ const Navbar = () => {
   if (isLoggedIn === false) {
     links.splice(4);
   }
-  if (isLoggedIn === true && role === "user") {
+  if (isLoggedIn === true && role === "buyer" || role === "seller") {
     links.splice(6, 1);
   }
   if (role === "admin") {
@@ -68,6 +69,10 @@ const Navbar = () => {
               BookCon
             </Link>
           </div>
+          <form class="d-flex" role="search">
+          <input class="form-control me-2 searchbar" type="search" placeholder="Search" aria-label="Search"/>
+          <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
           <div className=" w-1/6 block  lg:hidden">
             <button
               className="block border-0 bg-transparent px-2  hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0  lg:hidden"
