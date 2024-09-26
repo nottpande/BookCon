@@ -109,7 +109,7 @@ const booksData = [
     },
     {
         url: "https://tse2.mm.bing.net/th?id=OIP.kdrgeYW8Ko00iOTZuWYXeAHaKW&pid=Api&P=0&h=180",
-        title: "To Kill a Mockingbird",
+        title: "Ikigai",
         author: "Héctor García and Francesc Miralles",
         price: 599,
         description: "Ikigai: The Japanese Secret to a Long and Happy Life by Héctor García and Francesc Miralles explores the ancient Japanese philosophy of finding purpose and joy in everyday life. Drawing from the wisdom of Okinawa, the place with the highest life expectancy, the authors reveal how discovering your 'ikigai' — your reason for being — can lead to a more fulfilling, balanced, and content life. This beautifully written book offers practical tips on how to achieve health, happiness, and longevity, making it a must-read for anyone seeking deeper meaning and lasting joy.",
