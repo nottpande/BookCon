@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const User = require("./models/user");
 const Book = require("./models/book");
 const Order = require("./models/order");
@@ -18,6 +19,70 @@ mongoose
 
 // Sample data for books
 const booksData = [
+    {
+        url: "https://m.media-amazon.com/images/I/41IkR2Ml51L._SY445_SX342_.jpg",
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        price: 249,
+        description: "A novel about the American dream.",
+        language: "English",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/712HEn9SNwL._SY466_.jpg",
+        title: "Half Girlfriend",
+        author: "Chetan Bhagat",
+        price: 399,
+        description: "A story of Bihari boy Madhav, who falls in love with Riya",
+        language: "English",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/51yMba1xEfL._SY445_SX342_.jpg",
+        title: "2 States",
+        author: "Chetan Bhagat",
+        price: 399,
+        description: "A story about two lovers, from two different states, having cultural differences.",
+        language: "English",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/51obIvQfm3L._SY445_SX342_.jpg",
+        title: "Harry Potter and the Deathly Hallows",
+        author: "J.K. Rowling",
+        price: 449,
+        description: "The Dark Lord is breathing fear into everything Harry loves, and to stop him Harry will have to find and destroy the remaining Horcruxes.",
+        language: "English",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/51BEMPE1tJL._SY445_SX342_.jpg",
+        title: "Harry Potter and the Cursed Child",
+        author: "J.K. Rowling",
+        price: 449,
+        description: "The Dark Lord is breathing fear into everything Harry loves, and to stop him Harry will have to find and destroy the remaining Horcruxes.",
+        language: "English",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/818umIdoruL._SY466_.jpg",
+        title: "Harry Potter and the Chamber of Secrets",
+        author: "J.K. Rowling",
+        price: 449,
+        description: "The Dark Lord is breathing fear into everything Harry loves, and to stop him Harry will have to find and destroy the remaining Horcruxes.",
+        language: "English",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/91G+QE3U5KL._SY466_.jpg",
+        title: "Percy Jackson and the Olympians: The Chalice of the Gods",
+        author: "Rick Riordan",
+        price: 499,
+        description: "Percy Jackson has saved the world multiple times - battling monsters, Titans, even giants - but these days the modern-day son of Poseidon is hoping for a regular final year at school. Too bad the Greek gods have other plans, and three new quests for Percy to complete.",
+        language: "English",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/81DQblziYaL._SY466_.jpg",
+        title: "Percy Jackson and the Greek Gods",
+        author: "Rick Riordan",
+        price: 499,
+        description: "Want to know how Zeus came to be top god? How many times Kronos ate one of his own kids? How Athena literally burst out of another god's head?",
+        language: "English",
+    },
     {
         url: "https://tse1.mm.bing.net/th?id=OIP.Ze9xLuFqT-On5MXEKOqJuwAAAA&pid=Api&P=0&h=180",
         title: "Twilight",
@@ -56,7 +121,7 @@ const booksData = [
 const usersData = [
     {
         username: "john_doe",
-        email: "john@example.com",
+        email: "john@gmail.com",
         password: "hashed_password1", // In production, use bcrypt
         address: "123 Main St, New York, NY",
         avatar: "https://cdn-icons-png.flaticon.com/128/3177/3177440.png",
@@ -67,11 +132,22 @@ const usersData = [
     },
     {
         username: "jane_doe",
-        email: "jane@example.com",
+        email: "jane@gmail.com",
         password: "hashed_password2",
         address: "456 Elm St, Los Angeles, CA",
         avatar: "https://cdn-icons-png.flaticon.com/128/3177/3177440.png",
         role: "user",
+        favourite: [],
+        cart: [],
+        orders: [],
+    },
+    {
+        username: "admin_bookcon",
+        email: "admin.bookcon@gmail.com",
+        password: "admin_bookcon",
+        address: "456 Elm St, Los Angeles, CA",
+        avatar: "https://cdn-icons-png.flaticon.com/128/3177/3177440.png",
+        role: "admin",
         favourite: [],
         cart: [],
         orders: [],
@@ -85,7 +161,14 @@ const seedData = async () => {
         await User.deleteMany({});
         await Book.deleteMany({});
         await Order.deleteMany({});
-
+        
+        console.log("Inserting seed-data into the database");
+        // Hash the users' passwords
+        for (let user of usersData) {
+            const salt = await bcrypt.genSalt(10);  // Generate salt, salt is a random value added to the password.
+            user.password = await bcrypt.hash(user.password, salt); // Hash the password
+        }
+        
         // Insert books
         const books = await Book.insertMany(booksData);
         console.log("Books seeded:", books);
@@ -104,17 +187,23 @@ const seedData = async () => {
         const ordersData = [
             {
                 user: users[0]._id,
+                username : users[0].username,
                 book: books[0]._id,
+                bookname: books[0].title,
                 status: "Order placed",
             },
             {
                 user: users[1]._id,
+                username: users[1].username,
                 book: books[1]._id,
+                bookname : books[1].title,
                 status: "Out for delivery",
             },
             {
                 user: users[0]._id,
+                username: users[0].username,
                 book: books[2]._id,
+                bookname : books[2].title,
                 status: "Delivered",
             },
         ];
@@ -132,7 +221,7 @@ const seedData = async () => {
         await users[1].save();
 
         console.log("Users updated with orders, cart, and favorites:", users);
-
+        console.log("Seed Data has been inserted into the database!")
         mongoose.connection.close();
     } catch (error) {
         console.error("Error seeding data:", error);
