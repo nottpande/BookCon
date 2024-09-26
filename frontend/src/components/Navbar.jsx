@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import SearchResult from "./searchresult";
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const role = useSelector((state) => state.auth.role);
   var links = [
@@ -48,6 +49,34 @@ const Navbar = () => {
     links.splice(4, 1);
   }
 
+  const [searchResults, setSearchResults] = useState([]);
+  const [query, setQuery] = useState("");
+  const [showResults, setShowResults] = useState(false); // State to control display of MainPage
+
+  useEffect(() => {
+    if (query) { // Only fetch if there is a query
+      fetch(`http://localhost:5000/api/v1/search?q=${encodeURIComponent(query)}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json(); // Assuming your API always returns JSON
+        })
+        .then(data => {
+          setSearchResults(data); // Set the search results
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+      setSearchResults([]); // Clear results if query is empty
+    }
+  }, [query]); // This effect runs every time `query` changes
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const queryValue = event.target.elements.search.value;
+    setQuery(queryValue); // Update query state directly from the form input
+  };
+
   return (
     <>
       <nav className="relative flex w-full flex-wrap items-center justify-between bg-zinc-800 py-3 text-white lg:py-4" data-twe-navbar-ref>
@@ -61,11 +90,13 @@ const Navbar = () => {
 
           {/* Search Bar */}
           <div className="hidden flex-grow items-center justify-center lg:flex">
-            <form className="flex w-1/2 items-center">
+            <form className="flex w-1/2 items-center" onSubmit={handleSearch}>
               <input
+                name="search"
                 type="search"
                 placeholder="Search Book"
                 className="w-full rounded-l-lg border-0 bg-white px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-700"
+                onChange={(e) => setQuery(e.target.value)}
               />
               <button
                 type="submit"
@@ -76,6 +107,7 @@ const Navbar = () => {
             </form>
           </div>
 
+          
           {/* Navigation Links */}
           <div className="hidden items-center lg:flex">
             {links.map((items, i) => (
@@ -180,6 +212,9 @@ const Navbar = () => {
           )}
         </div>
       </div>
+
+      {query && searchResults.length > 0 && <SearchResult results={searchResults} query={query} />}
+
     </>
   );
 };

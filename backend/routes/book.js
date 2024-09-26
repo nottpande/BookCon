@@ -106,4 +106,25 @@ router.get("/get-book-by-id/:id", async (req, res) => {
     }
 });
 
+// Search for books by title
+router.get('/search', async (req, res) => {
+        try {
+        const query = req.query.q; // Get the search query from the request
+        if (!query) {
+            return res.status(400).json({ message: 'Search query is required.' });
+        }
+    
+        // Find books with titles matching the search query (case insensitive)
+        const books = await Book.find({ title: { $regex: query, $options: 'i' } });
+    
+        if (books.length === 0) {
+            return res.status(404).json({ message: 'No books found.' });
+        }
+    
+        // Return the found books in JSON format
+        return res.status(200).json(books);
+        } catch (error) {
+        return res.status(500).json({ message: 'Server error.', error: error.message });
+        }
+});
 module.exports = router;
