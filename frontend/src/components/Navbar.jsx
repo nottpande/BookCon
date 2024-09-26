@@ -49,7 +49,7 @@ const Navbar = () => {
     links.splice(4, 1);
   }
 
-  return (
+  return ( 
     <>
       <nav
         className="relative flex w-full flex-nowrap items-center justify-between bg-zinc-800 py-2 text-white  lg:flex-wrap lg:justify-start lg:py-4"
@@ -70,8 +70,8 @@ const Navbar = () => {
             </Link>
           </div>
           <form class="d-flex" role="search">
-          <input class="form-control me-2 searchbar" type="search" placeholder="Search" aria-label="Search"/>
-          <button class="btn btn-outline-success" type="submit">Search</button>
+            <input class="form-control me-2 searchbar" type="search" placeholder="Search" aria-label="Search"/>
+            <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
           <div className=" w-1/6 block  lg:hidden">
             <button

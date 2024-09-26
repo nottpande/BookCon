@@ -18,6 +18,7 @@ import AllOrders from "./components/AdminPages/AllOrders";
 import AddBook from "./components/AdminPages/AddBook";
 import UpdateBooks from "./components/AdminPages/UpdateBooks";
 import AboutUs from "./pages/About_Us";
+import ContactUs from "./pages/ContactUs";
 const App = () => {
     const dispatch = useDispatch();
     const role = useSelector((state) => state.auth.role);
@@ -42,6 +43,7 @@ const App = () => {
                     element={<ViewBookDetails />}
                 />
                 <Route path="/about-us" element={<AboutUs/>}></Route>
+                <Route path="/contact-us" element={<ContactUs/>}></Route>
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
