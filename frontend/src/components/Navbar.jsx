@@ -65,11 +65,11 @@ const Navbar = () => {
               <input
                 type="search"
                 placeholder="Search Book"
-                className="w-full rounded-l-lg border-0 bg-white px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-950"
+                className="w-full rounded-l-lg border-0 bg-white px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-700"
               />
               <button
                 type="submit"
-                className="rounded-r-lg bg-green-900 px-4 py-2 text-white hover:bg-green-950 focus:outline-none focus:ring-2 focus:ring-green-950"
+                className="rounded-r-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700"
               >
                 Search
               </button>
