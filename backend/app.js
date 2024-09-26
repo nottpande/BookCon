@@ -6,6 +6,7 @@ const book = require("./routes/book");
 const cart = require("./routes/cart");
 const fav = require("./routes/favourite");
 const order = require("./routes/order");
+const message = require("./routes/message")
 require("dotenv").config();
 
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use("/api/v1", book);
 app.use("/api/v1", cart);
 app.use("/api/v1", fav);
 app.use("/api/v1", order);
+app.use("/api/v1", message);
 
 //SERVER
 app.listen(PORT, () => {
