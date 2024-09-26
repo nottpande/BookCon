@@ -125,7 +125,7 @@ const usersData = [
         password: "hashed_password1", // In production, use bcrypt
         address: "123 Main St, New York, NY",
         avatar: "https://cdn-icons-png.flaticon.com/128/3177/3177440.png",
-        role: "user",
+        role: "buyer",
         favourite: [],
         cart: [],
         orders: [],
@@ -136,7 +136,7 @@ const usersData = [
         password: "hashed_password2",
         address: "456 Elm St, Los Angeles, CA",
         avatar: "https://cdn-icons-png.flaticon.com/128/3177/3177440.png",
-        role: "user",
+        role: "buyer",
         favourite: [],
         cart: [],
         orders: [],

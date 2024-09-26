@@ -103,6 +103,34 @@ const Signup = () => {
                             onChange={change}
                         />
                     </div>
+                    <div className="mt-6">
+                        <p className="text-zinc-400 text-center">How do you plan on using this website</p>
+                        <div className="flex space-x-4 mt-4">
+                            <button
+                            className={`w-full p-2 rounded ${
+                                Data.role === "seller"
+                                ? "bg-zinc-600 text-white"
+                                : "bg-zinc-700 text-zinc-400"
+                            }`}
+                            type="button"
+                            onClick={() => setData({ ...Data, role: "seller" })}
+                            >
+                            I WANT TO SELL/LEND BOOKS <br/>ON THIS WEBSITE
+                            </button>
+                            <button
+                            className={`w-full p-2 rounded ${
+                                Data.role === "buyer"
+                                ? "bg-zinc-600 text-white"
+                                : "bg-zinc-700 text-zinc-400"
+                            }`}
+                            type="button"
+                            onClick={() => setData({ ...Data, role: "buyer" })}
+                            >
+                            I WANT TO PURCHASE/BUY BOOKS <br/>FROM THIS WEBSITE
+                            </button>
+                        </div>
+                    </div>
+
                     <div className="mt-4">
                         <button
                             className="w-full bg-blue-500 text-white font-semibold py-2 rounded hover:bg-blue-600 transition-all duration-300"
