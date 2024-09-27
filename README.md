@@ -13,7 +13,6 @@
 8. [Scalability](#scalability)
 9. [Models Overview](#models-overview)
 10. [Routes](#routes)
-11. [Future Plans](#future-plans)
 
 ---
 
@@ -130,9 +129,9 @@ BookCon is designed with scalability in mind:
 7. **UserAuth**: Manages user authentication, including login, registration, and token management.
 
 ## Team Members
-Amodini A P
-Aditya Pande
-Sravya Sri Mallampalli
-Parth Chandel
-Sathyam A
+Amodini A P,
+Aditya Pande,
+Sravya Sri Mallampalli,
+Parth Chandel,
+Sathyam A.
 
