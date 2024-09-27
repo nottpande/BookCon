@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from './components/sidebar';
 import AddListing from './components/AddListing';
-import SellerListings from './components/SellerListings';
+import SellerListings from './components/SellerListing';
 import { checkAuth } from './api';
 
 const SellerDashboard = () => {
