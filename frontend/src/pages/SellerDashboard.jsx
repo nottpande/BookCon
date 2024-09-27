@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/sidebar';
 import AddListing from './components/AddListing';
 import SellerListings from './components/SellerListings';
 import { checkAuth } from './api';
