@@ -1,4 +1,5 @@
 # BookCon 📚
+Group ID - 47
 
 **BookCon** is a full-stack web application built using the MERN stack (MongoDB, Express, React, Node.js) for managing an online bookstore. The application supports multiple roles with distinct access and capabilities for users, sellers, and admins. It features scalable models, JWT-based authentication, and role-based access control.
 
@@ -129,9 +130,9 @@ BookCon is designed with scalability in mind:
 7. **UserAuth**: Manages user authentication, including login, registration, and token management.
 
 ## Team Members
-Amodini A P,
-Aditya Pande,
-Sravya Sri Mallampalli,
-Parth Chandel,
-Sathyam A.
+Amodini A P - S20220010014,
+Aditya Pande - S20220010007,
+Sravya Sri Mallampalli - S202200100206,
+Parth Chandel - S20220010165,
+Sathyam A - S20220010195.
 
